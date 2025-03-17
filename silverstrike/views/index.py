@@ -40,6 +40,7 @@ class IndexView(LoginRequiredMixin, generic.TemplateView):
         for t in upcoming:
             if t.transaction.transaction_type != Transaction.TRANSFER:
                 outstanding += t.amount
+        context['balance'] = round(context['balance'], 2)
         context['working_balance'] = context['balance'] + outstanding
         outstanding = 0
         for r in recurrences:

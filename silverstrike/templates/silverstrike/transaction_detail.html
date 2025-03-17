@@ -65,7 +65,7 @@
     <td>{{ split.title }}</td>
     <td><a href="{{ split.account.get_absolute_url }}">{{ split.account }}</a></td>
     <td><a href="{{ split.opposing_account.get_absolute_url }}">{{ split.opposing_account }}</a></td>
-    <td{% if split.is_withdraw %} class="text-red"{% elif split.is_deposit %} class="text-green"{% endif %}>
+    <td class="{% if split.is_withdraw %} text-red {% elif split.is_deposit %} text-green{% endif %} text-right">
       {% if split.is_transfer %}{{ split.amount|negate|intcomma }}{% else %}{{ split.amount|intcomma }}{% endif %}
     </td>
     <td>{{ split.date }}</td>

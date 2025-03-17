@@ -37,3 +37,7 @@
     color: unset !important;
   }
 }
+
+.text-right {
+  text-align: right;
+}
