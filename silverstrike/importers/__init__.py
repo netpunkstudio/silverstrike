@@ -1,6 +1,8 @@
-from . import dkb, dkb_visa, pc_mastercard, volksbank
+from . import dkb, dkb_visa, pc_mastercard, volksbank, chase, bmo
 
 IMPORTERS = [
+    chase,
+    bmo,
     dkb,
     dkb_visa,
     pc_mastercard,
@@ -8,6 +10,8 @@ IMPORTERS = [
 ]
 
 IMPORTER_NAMES = [
+    'Chase',
+    'BMO',
     'DKB Giro',
     'DKB Visa',
     'PC MasterCard',
