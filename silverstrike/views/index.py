@@ -22,11 +22,11 @@ class IndexView(LoginRequiredMixin, generic.TemplateView):
         context['balance'] = queryset.aggregate(
             models.Sum('amount'))['amount__sum'] or 0
         queryset = queryset.date_range(dstart, dend)
-        context['income'] = abs(queryset.income().aggregate(
-                models.Sum('amount'))['amount__sum'] or 0)
-        context['expenses'] = abs(queryset.expense().aggregate(
-                models.Sum('amount'))['amount__sum'] or 0)
-        context['difference'] = context['income'] - context['expenses']
+        context['income'] = round(abs(queryset.income().aggregate(
+                models.Sum('amount'))['amount__sum'] or 0), 2)
+        context['expenses'] = round(abs(queryset.expense().aggregate(
+                models.Sum('amount'))['amount__sum'] or 0), 2)
+        context['difference'] = round(context['income'] - context['expenses'], 2)
 
         context['accounts'] = Account.objects.personal().shown_on_dashboard()
         upcoming = Split.objects.personal().upcoming().transfers_once()
@@ -58,12 +58,12 @@ class IndexView(LoginRequiredMixin, generic.TemplateView):
         previous_last = dstart - timedelta(days=1)
         previous_first = previous_last.replace(day=1)
         queryset = Split.objects.personal().date_range(previous_first, previous_last)
-        context['previous_income'] = abs(queryset.income().aggregate(
-            models.Sum('amount'))['amount__sum'] or 0)
+        context['previous_income'] = round(abs(queryset.income().aggregate(
+            models.Sum('amount'))['amount__sum'] or 0), 2)
 
-        context['previous_expenses'] = abs(queryset.expense().aggregate(
-                models.Sum('amount'))['amount__sum'] or 0)
-        context['previous_difference'] = context['previous_income'] - context['previous_expenses']
+        context['previous_expenses'] = round(abs(queryset.expense().aggregate(
+                models.Sum('amount'))['amount__sum'] or 0), 2)
+        context['previous_difference'] = round(context['previous_income'] - context['previous_expenses'], 2)
         context['today'] = date.today()
         context['last_month'] = previous_first
         context['past'] = date.today() - timedelta(days=60)

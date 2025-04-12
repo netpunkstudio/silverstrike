@@ -59,13 +59,13 @@
         <table class="table">
           <tr><th></th><th>{{ today|date:"F" }}</th><th>{{ last_month|date:"F" }}</th></tr>
           <tr>
-            <th>{% trans 'Income' %}</th><td>{{ income|intcomma }}</td><td>{{ previous_income|intcomma }}</td>
+            <th>{% trans 'Income' %}</th><td class="right">{{ income|intcomma }}</td><td class="right">{{ previous_income|intcomma }}</td>
           </tr>
           <tr>
-            <th>{% trans 'Expenses' %}</th><td class="text-red">{{ expenses|intcomma }}</td><td class="text-red">{{ previous_expenses|intcomma }}</td>
+            <th>{% trans 'Expenses' %}</th><td class="text-red right">{{ expenses|intcomma }}</td><td class="text-red right">{{ previous_expenses|intcomma }}</td>
           </tr>
           <tr>
-            <th>{% trans 'Difference' %}</th><td{% if difference < 0 %} class="text-red"{% endif %}>{{ difference|intcomma }}</td><td{% if previous_difference < 0 %} class="text-red"{% endif %}>{{ previous_difference|intcomma }}</td>
+            <th>{% trans 'Difference' %}</th><td class="right {% if difference < 0 %} text-red{% endif %}">{{ difference|intcomma }}</td><td class="right {% if previous_difference < 0 %} text-red{% endif %}">{{ previous_difference|intcomma }}</td>
           </tr>
         </table>
       </div>
