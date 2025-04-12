@@ -1,5 +1,6 @@
 import csv
 import datetime
+improt re
 
 from silverstrike.importers.import_statement import ImportStatement
 
@@ -16,7 +17,7 @@ def import_transactions(csv_path):
                 lines.append(ImportStatement(
                     book_date=datetime.datetime.strptime(line[0], '%m/%d/%Y').date(),
                     transaction_date=datetime.datetime.strptime(line[0], '%m/%d/%Y').date(),
-                    account=line[1],
+                    account= re.sub(r' {2,20}', ' ', line[1]),
                     amount=float(line[2]),
                     ))
             except ValueError:
