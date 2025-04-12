@@ -1,6 +1,6 @@
 import csv
 import datetime
-improt re
+import re
 
 from silverstrike.importers.import_statement import ImportStatement
 
