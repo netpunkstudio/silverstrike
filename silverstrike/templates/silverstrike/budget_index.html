@@ -81,8 +81,8 @@
           <td>
               {{ form.amount|add_class:"form-control" }}
           </td>
-          <td>{{ form.spent.value|intcomma }}</td>
-          <td>{{ form.left.value|intcomma }}</td>
+          <td class="text-right">{{ form.spent.value|intcomma }}</td>
+          <td class="text-right">{{ form.left.value|intcomma }}</td>
         </tr>
         {% endfor %}
       </tbody>

@@ -41,9 +41,9 @@ class BudgetIndex(LoginRequiredMixin, generic.edit.FormView):
                 'budget_id': budget.id,
                 'category_id': budget.category_id,
                 'category_name': budget.category.name,
-                'spent': self.budget_spending.get(budget.category_id, 0),
+                'spent': round(self.budget_spending.get(budget.category_id, 0), 2),
                 'amount': budget.amount,
-                'left': -self.budget_spending.get(budget.category_id, 0) + budget.amount,
+                'left': round(-self.budget_spending.get(budget.category_id, 0) + budget.amount, 2),
                 'month': self.month,
             })
 
@@ -53,9 +53,9 @@ class BudgetIndex(LoginRequiredMixin, generic.edit.FormView):
                 'budget_id': -1,
                 'category_id': category.id,
                 'category_name': category.name,
-                'spent': self.budget_spending.get(category.id, 0),
+                'spent': round(self.budget_spending.get(category.id, 0), 2),
                 'amount': 0,
-                'left': -self.budget_spending.get(category.id, 0),
+                'left': round(-self.budget_spending.get(category.id, 0), 2),
                 'month': self.month,
             })
         return initial
@@ -67,8 +67,8 @@ class BudgetIndex(LoginRequiredMixin, generic.edit.FormView):
         context['previous_month'] = self.month - relativedelta(months=1)
         context['next_month'] = self.month + relativedelta(months=1)
 
-        context['allocated'] = sum([x.amount for x in self.budgets])
-        context['spent'] = sum([self.budget_spending.get(x.category_id, 0) for x in self.budgets])
+        context['allocated'] = round(sum([x.amount for x in self.budgets]), 2)
+        context['spent'] = round(sum([self.budget_spending.get(x.category_id, 0) for x in self.budgets]), 2)
         context['left'] = context['allocated'] - context['spent']
         return context
 
