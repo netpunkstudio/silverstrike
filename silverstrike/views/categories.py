@@ -44,8 +44,8 @@ class CategoryByMonth(LoginRequiredMixin, generic.TemplateView):
             'category').values('category', 'category__name').annotate(income=Sum('amount'))
 
         categories = []
-        sum_income = sum(x['income'] for x in income)
-        sum_expense = sum(x['spent'] for x in expenses)
+        sum_income = round(sum(x['income'] for x in income), 2) 
+        sum_expense = round(sum(x['spent'] for x in expenses), 2)
 
         category_map = {}
         for index, c in enumerate(expenses):
@@ -53,7 +53,7 @@ class CategoryByMonth(LoginRequiredMixin, generic.TemplateView):
             categories.append({
                 'id': id,
                 'name': c['category__name'] or '',
-                'spent': c['spent'],
+                'spent': round(c['spent'], 2),
                 'income': 0
             })
             category_map[id] = index
@@ -66,7 +66,7 @@ class CategoryByMonth(LoginRequiredMixin, generic.TemplateView):
                 categories.append({
                     'id': id,
                     'name': c['category__name'] or '',
-                    'income': c['income'],
+                    'income': round(c['income'], 2),
                     'spent': 0
                 })
 

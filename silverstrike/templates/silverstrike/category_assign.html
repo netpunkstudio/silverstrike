@@ -35,7 +35,7 @@
         <tr>
         <td>{{ object.title }}</td>
         <td>{{ object.date }}</td>
-        <td>{{ object.amount|intcomma }}</td>
+        <td class="text-right">{{ object.amount|intcomma }}</td>
         <td>{{ form.id }}{{ form.category|add_class:"form-control" }}</td>
         </tr>
       {% endfor %}
