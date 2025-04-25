@@ -41,7 +41,7 @@
                         {% endif %}
                     ></td>
                     <td>{{ datum.account }}</td>
-                    <td><input type="text" name="title-{{forloop.counter0}}"></td>
+                    <td><input type="text" name="title-{{forloop.counter0}}" value="{{datum.account}}"></td>
                     <td>{{ datum.notes }}</td>
                     <td>
                         <select name="recurrence-{{forloop.counter0}}">
